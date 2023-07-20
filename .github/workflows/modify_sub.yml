@@ -9,13 +9,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-                
-    - name: Execute script  
-      run: |
-        bash ./grab.sh
-        git config --global user.email "ronaldjc63@gmail.com"
-        git config --global user.name "rony432"
-        git config credential.helper store
-        git add -A
-        git commit -m "🚀 Servers Updated - $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M:%S')"
-        git push
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          
+      - name: Execute PHP script
+        run: |
+          bash ./grab.sh
+          git config --global user.email "ronaldjc63@gmail.com"
+          git config --global user.name "rony432"
+          git config credential.helper store
+          git add -A
+          git commit -m "🚀 Servers Updated - $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M:%S')"
+          git push
