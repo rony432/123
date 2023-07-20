@@ -23,21 +23,20 @@ jobs:
 
     - name: Execute script  
       run: |
-        git pull
         ./grab.sh
 
-    - name: Configure Git 
+    - name: Configure Git
       env:
         GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-      run: | 
-        git config --local user.email "$GIT_EMAIL"
+      run: |
+        git config --local user.email "$GIT_EMAIL"  
         git config --local user.name "$GIT_ACTOR"
 
     - name: Commit changes
       run: |
         git pull
-        git add newsub.txt 
-        git commit -m "Update newsub.txt"
+        git add newsub.txt
+        git commit -m "Update newsub.txt via GitHub Actions"
 
     - name: Push changes
       run: |
