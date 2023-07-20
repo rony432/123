@@ -32,3 +32,47 @@ jobs:
           git add newsub.txt
           git commit -m "Update newsub.txt"
           git push
+name: Modify Sub File
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  modify_sub:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Bash
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y bash
+
+    - name: Execute script  
+      run: |
+        git pull
+        ./grab.sh
+
+    - name: Configure Git 
+      env:
+        GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+      run: | 
+        git config --local user.email "$GIT_EMAIL"
+        git config --local user.name "$GIT_ACTOR"
+
+    - name: Commit changes
+      run: |
+        git pull
+        git add newsub.txt 
+        git commit -m "Update newsub.txt"
+
+    - name: Push changes
+      run: |
+        git push
