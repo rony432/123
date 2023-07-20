@@ -3,40 +3,6 @@ name: Modify Sub File
 on:
   push:
     branches:
-      - main  # Adjust this branch name to the appropriate branch
-
-jobs:
-  modify_sub:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Bash
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y bash
-
-      - name: Clone repository to root folder
-        run: |
-          git clone ${{ github.repository }} /tmp/repo
-          mv /tmp/repo/* .
-          rm -rf /tmp/repo
-
-      - name: Execute the script
-        run: |
-          ./grab.sh
-          git config --local user.email "ronaldjc63@gmail.com"
-          git config --local user.name "GitHub Actions"
-          git add newsub.txt
-          git commit -m "Update newsub.txt"
-          git push
-name: Modify Sub File
-
-on:
-  push:
-    branches:
       - main
 
 jobs:
