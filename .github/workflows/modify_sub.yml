@@ -23,7 +23,7 @@ jobs:
 
     - name: Execute script  
       run: |
-        ./grab.sh
+        bash ./grab.sh
 
     - name: Configure Git
       env:
